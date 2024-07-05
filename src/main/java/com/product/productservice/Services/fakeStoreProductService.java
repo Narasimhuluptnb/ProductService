@@ -33,6 +33,22 @@ public class fakeStoreProductService implements ProductService{
         }
         return products;
     }
+
+    @Override
+    public Product updateProduct(Product product) {
+        return null;
+    }
+
+    @Override
+    public Product replaceProduct(Product product) {
+        return null;
+    }
+
+    @Override
+    public void deleteProduct(long id) {
+
+    }
+
     private Product ConvetDTOtoProduct(FakeStoreProductDto fakeStoreProductDto) {
         Product product = new Product();
         Category category = new Category();
