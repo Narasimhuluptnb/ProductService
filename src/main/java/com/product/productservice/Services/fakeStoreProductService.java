@@ -35,12 +35,12 @@ public class fakeStoreProductService implements ProductService{
     }
 
     @Override
-    public Product updateProduct(Product product) {
+    public Product updateProduct(Product produc,long id) {
         return null;
     }
 
     @Override
-    public Product replaceProduct(Product product) {
+    public Product replaceProduct(Product product,long id) {
         return null;
     }
 
