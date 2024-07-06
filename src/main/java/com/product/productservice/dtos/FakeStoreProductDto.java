@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
+// These are used to communicate with clients.
 public class FakeStoreProductDto {
     private long id;
     private String title;
