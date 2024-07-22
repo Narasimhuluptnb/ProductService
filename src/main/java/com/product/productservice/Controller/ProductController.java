@@ -3,6 +3,7 @@ package com.product.productservice.Controller;
 import com.product.productservice.Models.Product;
 import com.product.productservice.Services.ProductService;
 import com.product.productservice.exceptions.ProductNotFoundException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import java.util.List;
 public class ProductController {
     private ProductService productService;
     // this is used to create object of the service classes that are implementing the interface.
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("selfProductService") ProductService productService) {
         this.productService = productService;
     }
 
@@ -24,7 +25,6 @@ public class ProductController {
         ResponseEntity<Product> responseEntity = new ResponseEntity<>(productService.getSingleProduct(id), HttpStatus.OK);
         //throw new ArithmeticException();
         //throw  new NullPointerException();
-
        return responseEntity;
     }
 
@@ -34,7 +34,7 @@ public class ProductController {
     }
     @PatchMapping("/{id}")
     // Here only a few attributes will get updated and the others have their old values.
-    public Product updateProduct(@RequestBody Product product,@PathVariable long id){
+    public Product updateProduct(@RequestBody Product product,@PathVariable long id) throws ProductNotFoundException {
         return productService.updateProduct(product,id);
     }
 
@@ -43,8 +43,20 @@ public class ProductController {
     public Product replaceProduct(@RequestBody Product product,@PathVariable long id){
         return productService.replaceProduct(product,id);
     }
-    public void deleteProduct(Long id){
-        return;
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable("id") Long id){
+        productService.deleteProduct(id);
     }
+
+    @PostMapping("/newProduct")
+    public Product addNewProduct(@RequestBody Product product){
+        productService.addNewProduct(product);
+        return product;
+
+
+    }
+
+
 
 }

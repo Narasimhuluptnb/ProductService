@@ -60,6 +60,11 @@ public class fakeStoreProductService implements ProductService{
 
     }
 
+    @Override
+    public void addNewProduct(Product product) {
+
+    }
+
     private Product ConvetDTOtoProduct(FakeStoreProductDto fakeStoreProductDto) {
         Product product = new Product();
         Category category = new Category();
